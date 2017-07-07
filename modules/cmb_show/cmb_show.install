@@ -1,0 +1,76 @@
+<?php
+
+// @helpful info
+// View modes are stored in the DB in the variables table.
+// Name/key are prefixed with "field_bundle_settings_node__",
+// such as "field_bundle_settings_node__cm_show"
+
+/**
+ * Implements hook_install().
+ *
+ * @see http://anthonypower.com/notebook/programmatically-set-node-type-visibility-blocks
+ * Set block visibility by content/node type.
+ *
+ * hook_uninstall() is not needed here b/c node module takes care of cleaning up db.
+ */
+function cmb_show_install() {
+  // cmb_show_right_sidebar
+  $query = db_insert('block_node_type')
+    ->fields(array('type', 'module', 'delta'))
+    ->values(
+      array(
+        'type' => 'cm_show',
+        'module' => 'cmb_show',
+        'delta' => 'cmb_show_right_sidebar',
+      )
+    )
+    ->execute();
+
+  // Add "View Modes"
+  $view_modes_add = [
+    'cmb_show_meta_left',
+    'cmb_show_meta_right',
+  ];
+
+  // Iterate over each view mode and update
+  foreach ($view_modes_add as $view_mode_add) {
+    $settings = field_bundle_settings('node', 'cm_show');
+    $settings['view_modes'][$view_mode_add]['custom_settings'] = TRUE;
+    field_bundle_settings('node', 'cm_show', $settings);
+  }
+}
+
+/**
+ * Implements hook_update_N(&$sandbox).
+ * Update for Version 7.x-1.0
+ * Remove old view modes from "cm_show" and add new view modes.
+ */
+function cmb_show_update_7100(&$sandbox) {
+  // Remove "View Modes"
+  $view_modes_remove = [
+    'cm_show_meta',
+    'full',
+    'teaser',
+    'search_result',
+  ];
+
+  // Iterate over each view mode and update
+  foreach ($view_modes_remove as $view_mode_remove) {
+    $settings = field_bundle_settings('node', 'cm_show');
+    $settings['view_modes'][$view_mode_remove]['custom_settings'] = FALSE;
+    field_bundle_settings('node', 'cm_show', $settings);
+  }
+
+  // Add "View Modes"
+  $view_modes_add = [
+    'cmb_show_meta_left',
+    'cmb_show_meta_right',
+  ];
+
+  // Iterate over each view mode and update
+  foreach ($view_modes_add as $view_mode_add) {
+    $settings = field_bundle_settings('node', 'cm_show');
+    $settings['view_modes'][$view_mode_add]['custom_settings'] = TRUE;
+    field_bundle_settings('node', 'cm_show', $settings);
+  }
+}

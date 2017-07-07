@@ -1,0 +1,14 @@
+@media screen {
+  /* line 2, ../scss/cc_image.scss */
+  .cc--image.full-width-ee {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  /* line 6, ../scss/cc_image.scss */
+  .cc--image.full-width-ee .col-md-12 {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+}

@@ -1,0 +1,15 @@
+name = CC Text Features
+description = CC Text Features
+core = 7.x
+package = Content Components
+version = 7.x-1.0
+project = cc_text_features
+dependencies[] = features
+dependencies[] = filter
+dependencies[] = paragraphs
+dependencies[] = text
+features[features_api][] = api:2
+features[field_base][] = field_cc_text_paragraph
+features[field_instance][] = paragraphs_item-text-field_cc_text_paragraph
+features[filter][] = cc_text_paragraph
+features[paragraphs][] = text

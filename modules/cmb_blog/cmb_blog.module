@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function cmb_blog_image_default_styles() {
+  $styles = array();
+  $styles['cmb_blog_jumbotron'] = array(
+    'label' => 'CMB Blog Jumbotron [ cmb_blog_jumbotron ]',
+    'effects' => array(
+      array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 1440,
+          'height' => 720,
+          'upscale' => 1,
+        ),
+        'weight' => 0,
+      ),
+    )
+  );
+  return $styles;
+}

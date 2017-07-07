@@ -1,0 +1,50 @@
+<?php
+/**
+ * @file
+ * Install file for CMB Jumbotron
+ */
+
+/**
+ * Implements hook_update_N(&$sandbox)
+ */
+ // @todo come back and figure this out someday.
+/*function cmb_jumbotron_update_7001(&$sandbox) {
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'node')
+    ->propertyCondition('status', 1)
+    ->propertyCondition('type', 'cmb_landing_page');
+  $result = $query->execute();
+
+  if (isset($result['node'])) {
+    $nids = array_keys($result['node']);
+    $nodes = node_load_multiple($nids);
+
+    foreach($nodes as $node) {
+      if (isset($node->field_content_components[LANGUAGE_NONE])) {
+        foreach ($node->field_content_components[LANGUAGE_NONE] as $item) {
+          $item_id = $item['value'];
+          $p_item = entity_load('paragraphs_item', array($item_id));
+          $p_item = reset($p_item);
+          $items[] = $p_item;
+        }
+        foreach ($items as $paragraph) {
+          if ($paragraph->bundle == 'cmb_jumbotron') {
+            if (isset($paragraph->field_cc_cmbj_items[LANGUAGE_NONE])) {
+              foreach ($paragraph->field_cc_cmbj_items[LANGUAGE_NONE] as $item2) {
+                $item_id2 = $item2['value'];
+                $p_item2 = entity_load('paragraphs_item', array($item_id2));
+                $p_item2 = reset($p_item2);
+                $items2[] = $p_item2;
+              }
+            }
+            foreach($items2 as $paragraph_to_update) {
+              $paragraph_to_update->field_cc_cmbji_published[LANGUAGE_NONE][0]['value'] = 1;
+              $paragraph_to_update->save();
+            }
+          }
+        }
+      }
+    }
+  }
+}
+*/

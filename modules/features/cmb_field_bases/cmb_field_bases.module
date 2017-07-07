@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CMB Field Bases feature.
+ */
+
+include_once 'cmb_field_bases.features.inc';
